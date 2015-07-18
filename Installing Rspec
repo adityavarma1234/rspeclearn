@@ -1,0 +1,55 @@
+Installing Rspec
+$ gem install rspec
+$ rspec --init
+Inside gem file
+group :development, :test do
+        gem ‘rspec-rails’
+end
+$ bundle install
+$ rails generate rspec::install
+spec/spec_helper.rb (Requires all files with in spec/support)
+Dir[Rails.root.join(“spec/support/**/*.rb”)].each {|f| require f} 
+Allows you to change the default mocking framework
+Rspec.configure do |config|
+  config.mock_with :mocha
+…
+end
+
+Output
+rspec --color spec/models/zombie_spec.rb
+rspec --color --format documentation spec/models/zombie_spec.rb
+Put in .rspec to make it default
+--color
+--format documentation
+Running all the ‘_spec.rb’ files within /spec
+$ rspec
+ Running a specific directory
+$  rspec spec/models
+Running a specific test
+$  rspec spec/models/zombie_spec.rb
+Running a specific line (Finds the closest line and runs it. )
+$  rspec spec/models/zombie_spec.rb:4
+
+
+matchers
+zombie.name.should == ‘Ash’
+zombie.alive.should == false or zombie.alive.should be_false
+zombie.rotting.should == true or zombie.rotting.should be_true
+zombie.height.should > 5 or zombie.height.should be < 1
+zombie.height.should >= 5 
+zombie.height.should < 5
+zombie.height.should_not == 5 
+zombie.hungry?.should == true or zombie.hungry?.should be_true or 
+zombie.should be_hungry (calls hungry? method, also know as predicate matcher)
+
+to do list
+it “is name Ash”
+
+Useful for Debugging 
+xit “is named Ash” do
+ ...
+end
+it “is named Ash” do
+pending
+…
+end
